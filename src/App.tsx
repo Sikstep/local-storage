@@ -1,20 +1,35 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 
 function App() {
 
-  const [value, setValue] = useState<number>(0);
+    const [value, setValue] = useState<number>(0);
 
+    useEffect(() => {
 
-  const incHandler = () => {
-    setValue((previus) => previus +1)
-  };
-  return (
-    <div className="App">
-      <h1>{value}</h1>
-      <button onClick={incHandler}>inc</button>
-    </div>
-  );
+        let valueAsString = localStorage.getItem('counterKey')
+        if (valueAsString) {
+            let newValue = JSON.parse(valueAsString)
+            setValue(newValue)
+        }
+    }, [])
+
+    useEffect(() => {
+        localStorage.setItem('counterKey', JSON.stringify(value))
+    }, [value])
+
+    const incHandler = () => {
+
+        setValue( value + 1)
+    };
+
+    return (
+        <div className="App">
+            <h1>{value}</h1>
+            <button onClick={incHandler}>inc</button>
+
+        </div>
+    );
 }
 
 export default App;
