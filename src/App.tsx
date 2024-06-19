@@ -1,31 +1,45 @@
 import React, {useEffect, useState} from 'react';
 import './App.css';
+import {useDispatch, useSelector} from 'react-redux';
+import {AppRootReducerType, useAppDispatch} from './store/Store';
+import {incCounterAC, incValuesTC, setValueFromLocalStorageTC} from './counterReducer';
 
 function App() {
 
-    const [value, setValue] = useState<number>(0);
+    const counter = useSelector<AppRootReducerType, number>(state => state.counter.startValue)
+    const dispatch = useAppDispatch()
 
-    useEffect(() => {
+    useEffect(()=> {
+    dispatch(setValueFromLocalStorageTC())
+    },[])
 
-        let valueAsString = localStorage.getItem('counterKey')
-        if (valueAsString) {
-            let newValue = JSON.parse(valueAsString)
-            setValue(newValue)
-        }
-    }, [])
-
-    useEffect(() => {
-        localStorage.setItem('counterKey', JSON.stringify(value))
-    }, [value])
+    //
+    // const [value, setValue] = useState<number>(0);
+    //
+    // useEffect(() => {
+    //
+    //     let valueAsString = localStorage.getItem('counterKey')
+    //     if (valueAsString) {
+    //         let newValue = JSON.parse(valueAsString)
+    //         setValue(newValue)
+    //     }
+    // }, [])
+    //
+    // useEffect(() => {
+    //     localStorage.setItem('counterKey', JSON.stringify(value))
+    // }, [value])
 
     const incHandler = () => {
+        dispatch(incValuesTC())
+        // setValue( value + 1)
 
-        setValue( value + 1)
     };
+
+
 
     return (
         <div className="App">
-            <h1>{value}</h1>
+            <h1>{counter}</h1>
             <button onClick={incHandler}>inc</button>
 
         </div>
