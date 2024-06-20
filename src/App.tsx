@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
-import {useDispatch, useSelector} from 'react-redux';
+import {useSelector} from 'react-redux';
 import {AppRootReducerType, useAppDispatch} from './store/Store';
-import {incCounterAC, incValuesTC, setValueFromLocalStorageTC} from './counterReducer';
+import {incCounterAC} from './counterReducer';
 
 function App() {
 
@@ -10,7 +10,7 @@ function App() {
     const dispatch = useAppDispatch()
 
     useEffect(()=> {
-    dispatch(setValueFromLocalStorageTC())
+    // dispatch(setValueFromLocalStorageTC())
     },[])
 
     //
@@ -30,7 +30,7 @@ function App() {
     // }, [value])
 
     const incHandler = () => {
-        dispatch(incValuesTC())
+        dispatch(incCounterAC())
         // setValue( value + 1)
 
     };

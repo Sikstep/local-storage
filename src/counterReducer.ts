@@ -4,7 +4,7 @@ const initialState: StateType = {
     startValue: 0
 }
 
-type StateType = {
+export type StateType = {
     startValue: number
 }
 type ActionTypes =
